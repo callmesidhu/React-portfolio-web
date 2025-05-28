@@ -48,7 +48,7 @@ const AdminLoginPage = () => {
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-black via-gray-900 to-violet-900 overflow-y-hidden">
       <div className="w-full max-w-md backdrop-blur-md bg-white/10 border border-white/20 text-white rounded-3xl shadow-2xl p-10">
         <h2 className="text-4xl font-extrabold mb-8 text-center tracking-tight">
-          XyphX Admin Login
+          XyphX<br></br><p className="text-sm">callmesidhu@xyphx</p> Admin Login
         </h2>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>

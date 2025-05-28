@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { onAuthStateChanged, signOut } from "firebase/auth"; // ✅ Import added
-import { auth } from "../../configs/firebase"; // ✅ Make sure path is correct
+import { onAuthStateChanged, signOut } from "firebase/auth"; 
+import { auth } from "../../configs/firebase"; 
 
 import AdminAbout from "./admin/adminAbout";
 import AdminExperience from "./admin/adminExperience";

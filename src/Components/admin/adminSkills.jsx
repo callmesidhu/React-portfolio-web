@@ -22,10 +22,10 @@ export default function AdminSkills() {
   const [newItem, setNewItem] = useState({ name: '', src: '' });
   const [status, setStatus] = useState('');
 
-  // Reference to the current collection based on active tab
+
   const currentCollection = collection(db, activeTab);
 
-  // Fetch items from current collection ordered by id ascending
+
   const fetchItems = async () => {
     try {
       const q = query(currentCollection, orderBy('id', 'asc'));
@@ -39,11 +39,11 @@ export default function AdminSkills() {
 
   useEffect(() => {
     fetchItems();
-    setNewItem({ name: '', src: '' }); // reset input on tab change
+    setNewItem({ name: '', src: '' }); 
     setStatus('');
   }, [activeTab]);
 
-  // Get next id by incrementing max current id or start from 1
+
   const getNextId = () => {
     if (items.length === 0) return 1;
     return Math.max(...items.map(i => i.id)) + 1;
@@ -55,7 +55,6 @@ export default function AdminSkills() {
       return;
     }
 
-    // Basic URL validation
     try {
       new URL(newItem.src);
     } catch {

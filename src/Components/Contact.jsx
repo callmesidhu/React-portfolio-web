@@ -13,11 +13,28 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone || !formData.suggestion) {
-      toast.error("All fields are required!", { position: "top-right", theme: "dark", style: { backgroundColor: "#7C3AED", color: "#fff" } });
+    const { name, email, phone, suggestion } = formData;
+
+    if (!name || !email || !phone || !suggestion) {
+      toast.error("All fields are required!", {
+        position: "top-right",
+        theme: "dark",
+        style: { backgroundColor: "#7C3AED", color: "#fff" },
+      });
       return;
     }
-    toast.success("Submitted successfully!", { position: "top-right", theme: "dark", style: { backgroundColor: "#7C3AED", color: "#fff" } });
+
+    const message = `Name: ${name}%0AEmail: ${email}%0APhone: ${phone}%0ASuggestion: ${suggestion}`;
+    const whatsappURL = `https://wa.me/9496225620?text=${message}`;
+
+    window.open(whatsappURL, '_blank'); // Open WhatsApp with the message
+
+    toast.success("Opening WhatsApp...", {
+      position: "top-right",
+      theme: "dark",
+      style: { backgroundColor: "#7C3AED", color: "#fff" },
+    });
+
     setFormData({ name: '', email: '', phone: '', suggestion: '' });
   };
 
@@ -91,7 +108,6 @@ export default function Contact() {
             </div>
 
             <motion.button
-              onClick={handleSubmit}
               type="submit"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

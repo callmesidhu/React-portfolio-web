@@ -25,13 +25,13 @@ export default function Projects() {
     <a href='https://github.com/callmesidhu?tab=repositories' target='_blank'>
     <div id='projects' className="flex flex-col items-center py-12 lg:min-h-screen">
       <h2 className="text-center text-4xl m-4 font-black text-white">Projects </h2>
-      <p className='mb-8 m-2 text-center'>⚠️35+ Projects (Project section not updated) <u>Click_Here</u></p>
+ 
       <Swiper
         effect={'cards'}
         grabCursor={true}
         modules={[EffectCards, Autoplay]}
         autoplay={{ delay: 1500, disableOnInteraction: false }}
-        className="lg:w-[450px] lg:h-[600px] w-[200px] h-[300px] rounded-[15px] shadow-lg"
+        className="lg:w-[450px] lg:h-[600px] w-[200px] h-[300px] rounded-[15px] shadow-lg  card-swiper"
       >
         {projects.slice().reverse().map((project) => (
           <SwiperSlide key={project.id} className="bg-gray-900 project-card">

@@ -7,7 +7,6 @@ import AdminAbout from "./admin/adminAbout";
 import AdminExperience from "./admin/adminExperience";
 import AdminProjects from "./admin/adminProjects";
 import AdminHero from "./admin/adminHero";
-import AdminContact from "./admin/adminContact";
 import AdminSkills from "./admin/adminSkills"; 
 
 const Dashboard = () => {
@@ -42,8 +41,6 @@ const Dashboard = () => {
         return <AdminExperience />;
       case "Projects":
         return <AdminProjects />;
-      case "Contact":
-        return <AdminContact />;
       case "Skills":
         return <AdminSkills />;
       default:
@@ -65,7 +62,6 @@ const Dashboard = () => {
     "Experience",
     "Projects",
     "Skills",
-    "Contact",
   ];
 
   return (

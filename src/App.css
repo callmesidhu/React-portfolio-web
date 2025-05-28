@@ -37,4 +37,9 @@
       .project-button a:hover {
         background-color: #1e0033; /* Lighter violet on hover */
       }
-      
+      .card-swiper {
+  perspective: 50000px; 
+}
+.swiper-slide {
+  transform-style: preserve-3d;
+}

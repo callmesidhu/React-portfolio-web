@@ -59,7 +59,7 @@ const Navbar = () => {
         {/* Profile Image and Name */}
         <div className="mt-8">
           <img
-            src="https://media.licdn.com/dms/image/v2/D5603AQGvtK7KbQT2FA/profile-displayphoto-shrink_400_400/B56ZTbChtLGQAg-/0/1738841663960?e=1744848000&v=beta&t=39q_MXqt7IwMyAGNRJZF62zzQMXP2jXyiCNMHRHc0eg"
+            src="https://avatars.githubusercontent.com/u/92774572?v=4"
             alt="profile"
             className="w-48 mb-2 h-auto rounded-full mx-auto"
           />

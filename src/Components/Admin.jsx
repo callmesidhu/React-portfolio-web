@@ -1,11 +1,15 @@
 import React from 'react'
 
-function Admin() {
+function AdminDashboard() {
   return (
     <div>
-      admin
+      admin dashboard
+      <div className="flex flex-col items-center justify-center h-screen">
+        <h1 className="text-4xl font-bold mb-4">Admin Dashboard</h1>
+        <p className="text-lg">Manage your content here.</p>
+        </div>
     </div>
   )
 }
 
-export default Admin
+export default AdminDashboard

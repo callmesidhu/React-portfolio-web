@@ -7,10 +7,8 @@ import AdminAbout from "./admin/adminAbout";
 import AdminExperience from "./admin/adminExperience";
 import AdminProjects from "./admin/adminProjects";
 import AdminHero from "./admin/adminHero";
-import AdminTechnologies from "./admin/adminTechnologies";
-import AdminLanguages from "./admin/adminLanguages";
-import AdminFrameworks from "./admin/adminFrameworks";
 import AdminContact from "./admin/adminContact";
+import AdminSkills from "./admin/adminSkills"; 
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -44,14 +42,10 @@ const Dashboard = () => {
         return <AdminExperience />;
       case "Projects":
         return <AdminProjects />;
-      case "Technologies":
-        return <AdminTechnologies />;
-      case "Languages":
-        return <AdminLanguages />;
-      case "Frameworks":
-        return <AdminFrameworks />;
       case "Contact":
         return <AdminContact />;
+      case "Skills":
+        return <AdminSkills />;
       default:
         return <AdminHero />;
     }
@@ -70,9 +64,7 @@ const Dashboard = () => {
     "About",
     "Experience",
     "Projects",
-    "Technologies",
-    "Languages",
-    "Frameworks",
+    "Skills",
     "Contact",
   ];
 

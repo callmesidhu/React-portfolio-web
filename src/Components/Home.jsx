@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
+import { db } from '../../configs/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 import myImage from '../assets/images/my.png';
 
 export default function Home() {
+  const [roles, setRoles] = useState([]);
+
+
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "roles"));
+        const roleList = [];
+        querySnapshot.forEach((doc) => {
+          roleList.push(doc.data().role);
+        });
+
+        const roleSequence = roleList.flatMap((role) => [role + " ;", 2000]);
+        setRoles(roleSequence);
+      } catch (error) {
+        console.error("Error fetching roles:", error);
+      }
+    };
+
+    fetchRoles();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row items-center justify-center p-8 overflow-hidden" id="home">
 
-      {/* Left Side Text with animation */}
+      {/* Left Side Text */}
       <motion.div
         className="md:flex-1 text-center md:text-left px-4"
         initial={{ opacity: 0, x: -50, filter: "blur(10px)" }}
@@ -20,22 +44,19 @@ export default function Home() {
         <br />
         <h1 className="text-xl md:text-2xl font-bold mt-4">
           I'm a{" "}
-          <TypeAnimation
-            sequence={[
-              "Full Stack Web/App Developer ;", 2000,
-              "Tech and AI Enthusiast ;", 2000,
-              "Data Analyst ;", 2000,
-              "Prompt Engineer ;", 2000,
-            ]}
-            wrapper="span"
-            speed={50}
-            repeat={Infinity}
-            className="text-violet-500"
-          />
+          {roles.length > 0 && (
+            <TypeAnimation
+              sequence={roles}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+              className="text-violet-500"
+            />
+          )}
         </h1>
       </motion.div>
 
-      {/* Right Side Image with animation */}
+      {/* Right Side Image */}
       <motion.div
         className="md:flex-1 flex justify-center mt-8 md:mt-0"
         initial={{ opacity: 0, x: 50, filter: "blur(10px)" }}

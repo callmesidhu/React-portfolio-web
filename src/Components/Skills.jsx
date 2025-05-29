@@ -1,56 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { db } from '../../configs/firebase'; 
+import { collection, getDocs } from 'firebase/firestore';
 
-const skills = [
-  {
-    category: "Programming Languages",
-    items: [
-      { name: "C", src: "https://profilinator.rishav.dev/skills-assets/c-original.svg", link: "https://www.cprogramming.com/" },
-      { name: "C++", src: "https://profilinator.rishav.dev/skills-assets/cplusplus-original.svg", link: "https://www.cplusplus.com/" },
-      { name: "Java", src: "https://profilinator.rishav.dev/skills-assets/java-original-wordmark.svg", link: "https://www.java.com/" },
-      { name: "JavaScript", src: "https://profilinator.rishav.dev/skills-assets/javascript-original.svg", link: "https://www.javascript.com/" },
-      { name: "TypeScript", src: "https://profilinator.rishav.dev/skills-assets/typescript-original.svg", link: "https://www.typescriptlang.org/" },
-      { name: "Dart", src: "https://profilinator.rishav.dev/skills-assets/dartlang-icon.svg", link: "https://dart.dev/" },
-      { name: "Python", src: "https://profilinator.rishav.dev/skills-assets/python-original.svg", link: "https://www.python.org/" },
-      { name: "PHP", src: "https://profilinator.rishav.dev/skills-assets/php-original.svg", link: "https://www.php.net/" },
-    ],
-  },
-  {
-    category: "Frameworks",
-    items: [
-      { name: "React", src: "https://profilinator.rishav.dev/skills-assets/react-original-wordmark.svg", link: "https://reactjs.org/" },
-      { name: "Vue.js", src: "https://profilinator.rishav.dev/skills-assets/vuejs-original-wordmark.svg", link: "https://vuejs.org/" },
-      { name: "Tailwind CSS", src: "https://profilinator.rishav.dev/skills-assets/tailwindcss.svg", link: "https://www.tailwindcss.com/" },
-      { name: "Bootstrap", src: "https://profilinator.rishav.dev/skills-assets/bootstrap-plain.svg", link: "https://getbootstrap.com/docs/3.4/javascript/" },
-      { name: "HTML5", src: "https://profilinator.rishav.dev/skills-assets/html5-original-wordmark.svg", link: "https://en.wikipedia.org/wiki/HTML5" },
-      { name: "CSS3", src: "https://profilinator.rishav.dev/skills-assets/css3-original-wordmark.svg", link: "https://www.w3schools.com/css/" },
-      { name: "Node.js", src: "https://firebasestorage.googleapis.com/v0/b/reactnative-mobile-chat-app.appspot.com/o/Github%20icons%2Fnodejs.png?alt=media&token=5f202ed7-5546-48ec-8578-339d4e78553f", link: "https://nodejs.org/" },
-      { name: "NextJS", src: "https://profilinator.rishav.dev/skills-assets/nextjs.png", link: "https://nextjs.org/" },
-      { name: "MongoDB", src: "https://profilinator.rishav.dev/skills-assets/mongodb-original-wordmark.svg", link: "https://www.mongodb.com/" },
-      { name: "MySQL", src: "https://firebasestorage.googleapis.com/v0/b/reactnative-mobile-chat-app.appspot.com/o/Github%20icons%2FMysql.png?alt=media&token=9f68a2d2-d138-484e-b127-26351aedb973", link: "https://www.mysql.com/" },
-      { name: "PostgreSQL", src: "https://profilinator.rishav.dev/skills-assets/postgresql-original-wordmark.svg", link: "https://www.postgresql.org/" },
-      { name: "Express.js", src: "https://firebasestorage.googleapis.com/v0/b/reactnative-mobile-chat-app.appspot.com/o/Github%20icons%2Fex.png?alt=media&token=a697fad5-0606-4e80-a759-219aa180a76c", link: "https://expressjs.com/" },
-      { name: "Flutter", src: "https://profilinator.rishav.dev/skills-assets/flutterio-icon.svg", link: "https://flutter.dev/" },
-      { name: "Flask", src: "https://firebasestorage.googleapis.com/v0/b/reactnative-mobile-chat-app.appspot.com/o/Github%20icons%2Fflask.png?alt=media&token=994d6ec2-71b4-43ab-8129-d9887577efdc", link: "https://flask.palletsprojects.com/" },
-      { name: "Django", src: "https://firebasestorage.googleapis.com/v0/b/reactnative-mobile-chat-app.appspot.com/o/Github%20icons%2Fdjango.png?alt=media&token=9e328608-86eb-49ce-ac1b-f23bd5ed4d26", link: "https://www.djangoproject.com/" },
-      { name: "Laravel", src: "https://firebasestorage.googleapis.com/v0/b/reactnative-mobile-chat-app.appspot.com/o/Github%20icons%2Flaravel.png?alt=media&token=cbd2a396-64dd-4cb2-a78d-5835663ef5d7", link: "https://laravel.com/" }
-    ]
-  },
-  {
-    category: "Technologies",
-    items: [
-      { name: "Firebase", src: "https://profilinator.rishav.dev/skills-assets/firebase.png", link: "https://firebase.google.com/" },
-      { name: "Docker", src: "https://profilinator.rishav.dev/skills-assets/docker-original-wordmark.svg", link: "https://www.docker.com/" },
-      { name: "Linux", src: "https://profilinator.rishav.dev/skills-assets/linux-original.svg", link: "https://www.linux.org/" },
-      { name: "Arduino", src: "https://profilinator.rishav.dev/skills-assets/arduino.png", link: "https://www.arduino.cc/" },
-      { name: "Figma", src: "https://profilinator.rishav.dev/skills-assets/figma-icon.svg", link: "https://www.figma.com/" },
-      { name: "Power BI", src: "https://firebasestorage.googleapis.com/v0/b/reactnative-mobile-chat-app.appspot.com/o/Github%20icons%2Fpowerbi.png?alt=media&token=935e59d6-3913-4f9a-b688-5cea1342a923", link: "https://powerbi.microsoft.com/en-us/" },
-      { name: "NumPy", src: "https://upload.wikimedia.org/wikipedia/commons/3/31/NumPy_logo_2020.svg", link: "https://numpy.org/" },
-      { name: "Pandas", src: "https://upload.wikimedia.org/wikipedia/commons/e/ed/Pandas_logo.svg", link: "https://pandas.pydata.org/" },
-      { name: "Seaborn", src: "https://seaborn.pydata.org/_static/logo-wide-lightbg.svg", link: "https://seaborn.pydata.org/" }
-    ]
-  },
-];
 
 const GitHubStats = () => {
   return (
@@ -74,6 +26,7 @@ const GitHubStats = () => {
 const Skills = () => {
   const [inView, setInView] = useState(false);
   const skillsRef = useRef(null);
+  const [skills, setSkills] = useState([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -94,6 +47,34 @@ const Skills = () => {
         observer.unobserve(skillsRef.current);
       }
     };
+  }, []);
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const [langSnap, frameSnap, techSnap] = await Promise.all([
+          getDocs(collection(db, 'languages')),
+          getDocs(collection(db, 'frameworks')),
+          getDocs(collection(db, 'technologies')),
+        ]);
+
+        const languages = langSnap.docs.map(doc => doc.data());
+        const frameworks = frameSnap.docs.map(doc => doc.data());
+        const technologies = techSnap.docs.map(doc => doc.data());
+
+        const skillData = [
+          { category: 'Programming Languages', items: languages },
+          { category: 'Frameworks', items: frameworks },
+          { category: 'Technologies', items: technologies },
+        ];
+
+        setSkills(skillData);
+      } catch (error) {
+        console.error("Error fetching skills: ", error);
+      }
+    };
+
+    fetchSkills();
   }, []);
 
   return (

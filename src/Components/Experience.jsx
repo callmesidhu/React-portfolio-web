@@ -73,7 +73,7 @@ export default function Experience() {
         <h2 className="text-4xl font-bold text-center ">
           Current Positions
         </h2>
-        <u className="mb-12"> Click here for previous experience</u>
+        <u className="mb-12"> Double click here for more</u>
 
         <div className="relative border-l-2 border-gray-700 pl-6 max-w-3xl">
           {experiences.map((exp, index) => (

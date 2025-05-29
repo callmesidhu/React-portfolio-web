@@ -1,28 +1,42 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { db } from '../../configs/firebase';
+import {  doc, getDoc } from 'firebase/firestore';
 
-const aboutContent = `I’m S Sidharth (CallMeSidhu), a passionate full-stack developer with expertise in React, Next.js, Vue.js, Flask, Node.js, Django, Figma, MongoDB, PostgreSQL, etc. 
-I specialize in building modern, scalable web and mobile applications, constantly exploring new technologies to enhance performance and user experience.
-<br><br/> Currently, I’m diving deep into Data Structures and Algorithms (DSA), Machine Learning technologies, and Data Analysis, aiming to expand my knowledge in artificial intelligence and predictive analytics. My goal is to bridge the gap between software engineering and intelligent systems, leveraging data to drive innovation. 
-I love tackling complex tech challenges and turning ideas into reality. <br><br/>
-I am currently pursuing Engineering at College of Engineering Trivandrum (CET) and have completed my Higher Secondary Education in Computer Science from Gov. HSS Punalur in 2022.
-`;
-
-const aboutMore = `loading...`;
 
 export default function About() {
   const [inView, setInView] = useState(false);
   const aboutRef = useRef(null);
+  const [aboutContent, setAboutContent] = useState('');
 
-  // Intersection Observer to trigger animation on scroll
+  useEffect(() => {
+    const fetchAboutData = async () => {
+      try {
+        const docRef = doc(db, 'about', 'zPae0pmZUUI8p6dmga76'); 
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setAboutContent(data.content || '');
+        } else {
+          console.log('No such document!');
+        }
+      } catch (error) {
+        console.error('Error fetching about content:', error);
+      }
+    };
+
+    fetchAboutData();
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setInView(true);  // Trigger animation when the section is in view
+          setInView(true);  
         }
       },
-      { threshold: 0.5 }  // Trigger when 50% of the section is in view
+      { threshold: 0.5 } 
     );
 
     if (aboutRef.current) {
@@ -133,7 +147,7 @@ export default function About() {
           </motion.div>
 
           <div className="px-6">
-            <p dangerouslySetInnerHTML={{ __html: aboutMore }} />
+            <p>loading...</p>
           </div>
         </div>
       </motion.div>

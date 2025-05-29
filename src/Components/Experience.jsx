@@ -1,20 +1,30 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { db } from '../../configs/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 export default function Experience() {
   const [experiences, setExperiences] = useState([]);
   const [inView, setInView] = useState(false);
   const experienceRef = useRef(null);
 
-  // Fetch experience.json from public folder
+  // 🔥 Fetch from Firestore 'experience' collection
   useEffect(() => {
-    fetch("/experience.json")
-      .then((res) => res.json())
-      .then((data) => setExperiences(data))
-      .catch((err) => console.error("Failed to load experience data:", err));
+    const fetchExperienceFromFirestore = async () => {
+      try {
+        const experienceCollection = collection(db, "experience");
+        const snapshot = await getDocs(experienceCollection);
+        const experienceData = snapshot.docs.map(doc => doc.data());
+        setExperiences(experienceData);
+      } catch (err) {
+        console.error("Failed to fetch experiences from Firestore:", err);
+      }
+    };
+
+    fetchExperienceFromFirestore();
   }, []);
 
-  // Intersection Observer for animation trigger
+  // 🔍 InView animation trigger
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -36,14 +46,13 @@ export default function Experience() {
     };
   }, []);
 
-  // Duration Calculator
+  // ⏱️ Duration Calculator
   const calculateDuration = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = endDate === "Present" ? new Date() : new Date(endDate);
     const diffInMonths =
       (end.getFullYear() - start.getFullYear()) * 12 +
-      end.getMonth() -
-      start.getMonth();
+      end.getMonth() - start.getMonth();
 
     if (diffInMonths < 12) {
       return `${diffInMonths} month${diffInMonths !== 1 ? "s" : ""}`;

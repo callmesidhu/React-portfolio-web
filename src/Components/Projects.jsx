@@ -42,7 +42,7 @@ export default function Projects() {
             <SwiperSlide key={project.id} className="bg-gray-900 project-card">
               {/* Project Image or Button */}
               {project.image ? (
-                <img src={project.image} alt={project.title} className="project-image p-3 rounded-lg" />
+                <img src={project.image} alt={project.title} className="project-image md:p-3 p-1 rounded-lg max-h-24" />
               ) : (
                 <button className='flex-1 bg-black m-3 text-center text-4xl justify-center rounded-lg items-center cursor-pointer'>
                   <a href={project.visit || project.link}>Visit Here</a>
@@ -50,8 +50,8 @@ export default function Projects() {
               )}
 
               {/* Content */}
-              <div className="project-content p-6">
-                <h3 className="lg:text-2xl text-lg font-semibold">{project.title}</h3>
+              <div className="project-content md:p-6 p-1 px-3 ">
+                <h3 className="lg:text-2xl text-md font-semibold">{project.title}</h3>
                 {project.tech && (
                   <p className="lg:text-md text-sm mt-1 bg-gray-700 px-2 py-1 rounded-md w-max text-gray-300">
                     {project.tech}

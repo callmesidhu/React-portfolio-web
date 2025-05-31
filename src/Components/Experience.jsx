@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { db } from '../../configs/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+
 
 export default function Experience() {
   const [experiences, setExperiences] = useState([]);
   const [inView, setInView] = useState(false);
   const experienceRef = useRef(null);
 
-  // 🔥 Fetch from Firestore 'experience' collection
+ 
   useEffect(() => {
     const fetchExperienceFromFirestore = async () => {
       try {
         const experienceCollection = collection(db, "experience");
-        const snapshot = await getDocs(experienceCollection);
+        const orderedQuery = query(experienceCollection, orderBy("rank", "asc"));
+        const snapshot = await getDocs(orderedQuery);
         const experienceData = snapshot.docs.map(doc => doc.data());
         setExperiences(experienceData);
       } catch (err) {
@@ -24,7 +26,6 @@ export default function Experience() {
     fetchExperienceFromFirestore();
   }, []);
 
-  // 🔍 InView animation trigger
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -46,7 +47,7 @@ export default function Experience() {
     };
   }, []);
 
-  // ⏱️ Duration Calculator
+ 
   const calculateDuration = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = endDate === "Present" ? new Date() : new Date(endDate);

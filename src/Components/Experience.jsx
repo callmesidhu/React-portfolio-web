@@ -88,7 +88,7 @@ export default function Experience() {
                 delay: index * 0.2,
               }}
             >
-              <div className="absolute -left-3 top-0 bg-blue-500 rounded-full w-6 h-6 flex items-center justify-center text-black font-bold">
+              <div className="absolute -left-3 top-0 bg-violet-500 rounded-full w-6 h-6 flex items-center justify-center text-black font-bold">
                 {index + 1}
               </div>
 

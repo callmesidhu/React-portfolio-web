@@ -7,7 +7,7 @@ import Contact from "./Components/Contact";
 import Skills from "./Components/Skills";
 import About from "./Components/About";
 import Projects from "./Components/Projects";
-import Loader from "./Components/Loader"; // Import Loader component
+import Loader from "./Components/Loader";
 import Experience from "./Components/Experience";
 
 const App = () => {
@@ -17,25 +17,27 @@ const App = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000); // Show loader for 3 seconds
+    }, 3000); // 3 seconds loader
 
     return () => clearTimeout(timer);
   }, []);
 
   const handleClick = () => {
     setDisableParticles(true);
-
     setTimeout(() => {
       setDisableParticles(false);
     }, 10000);
   };
 
-  if (loading) {
-    return <Loader />; // Show loader before rendering app content
-  }
-
   return (
     <div className="relative" onClick={handleClick}>
+      {/* Loader Overlay */}
+      {loading && (
+        <div className="fixed inset-0 z-[999] bg-black flex items-center justify-center transition-opacity duration-300">
+          <Loader />
+        </div>
+      )}
+
       {/* Particles */}
       <div
         className={`fixed z-50 h-screen w-full transition-opacity duration-300 ${
@@ -54,7 +56,7 @@ const App = () => {
         />
       </div>
 
-      {/* Navbar and Content */}
+      {/* Main Content */}
       <Navbar />
       <Home />
       <About />
@@ -67,7 +69,7 @@ const App = () => {
       <div className="fixed inset-0 -z-10">
         <Waves
           lineColor="#2e0059"
-          backgroundColor="rgba(0, 0, 0, 0)" 
+          backgroundColor="rgba(0, 0, 0, 0)"
           waveSpeedX={0.03}
           waveSpeedY={0.03}
           waveAmpX={40}

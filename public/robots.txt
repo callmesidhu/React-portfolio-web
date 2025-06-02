@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://callmesidhu.pages.dev/sitemap.xml

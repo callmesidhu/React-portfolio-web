@@ -42,7 +42,7 @@ export default function Projects() {
             <SwiperSlide key={project.id} className="bg-gray-900 project-card">
               {/* Project Image or Button */}
               {project.image ? (
-                <img src={project.image} alt={project.title} className="project-image md:p-3 p-1 rounded-lg max-h-24" />
+                <img src={project.image} alt={project.title} className="project-image md:p-3 p-1 rounded-lg md:min-h-64 max-h-24" />
               ) : (
                 <button className='flex-1 bg-black m-3 text-center text-4xl justify-center rounded-lg items-center cursor-pointer'>
                   <a href={project.visit || project.link}>Visit Here</a>

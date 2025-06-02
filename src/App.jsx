@@ -9,6 +9,7 @@ import About from "./Components/About";
 import Projects from "./Components/Projects";
 import Loader from "./Components/Loader";
 import Experience from "./Components/Experience";
+import { VisitorCount } from "./utils/analysis";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -17,7 +18,8 @@ const App = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000); // 3 seconds loader
+      VisitorCount(); 
+    },3000); 
 
     return () => clearTimeout(timer);
   }, []);

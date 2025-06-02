@@ -8,11 +8,12 @@ import AdminExperience from "./admin/adminExperience";
 import AdminProjects from "./admin/adminProjects";
 import AdminHero from "./admin/adminHero";
 import AdminSkills from "./admin/adminSkills"; 
+import Dashboard from "./admin/Dashboard"; 
 
-const Dashboard = () => {
+const Admin = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("Hero");
+  const [activeTab, setActiveTab] = useState("Dashboard");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -33,6 +34,8 @@ const Dashboard = () => {
 
   const renderContent = () => {
     switch (activeTab) {
+      case "Dashboard":
+        return <Dashboard />;
       case "Hero":
         return <AdminHero />;
       case "About":
@@ -44,7 +47,7 @@ const Dashboard = () => {
       case "Skills":
         return <AdminSkills />;
       default:
-        return <AdminHero />;
+         return <Dashboard />;
     }
   };
 
@@ -57,11 +60,13 @@ const Dashboard = () => {
   }
 
   const tabs = [
+    "Dashboard",
     "Hero",
     "About",
     "Experience",
     "Projects",
     "Skills",
+
   ];
 
   return (
@@ -96,4 +101,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Admin;

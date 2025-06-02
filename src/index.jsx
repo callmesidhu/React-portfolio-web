@@ -62,7 +62,7 @@ function Index() {
 />
 
   <Helmet>
-  <title>Call Me Sidhu | Full Stack Developer & Tech Enthusiast</title>
+  <title>Call Me Sidhu | Full Stack Developer & Tech Enthusiast | Freelancer</title>
   <meta name="description" content="Sidhu (aka CallMeSidhu) - Full stack web & app developer, founder of XyphX, passionate about React, Node, Django and tech innovation." />
   <meta name="keywords" content="callmesidhu, Call Me Sidhu, sidhu, XyphX, tech enthusiast, full stack developer, web developer, app developer, react, node, django, github" />
   <meta property="og:title" content="Call Me Sidhu - Full Stack Developer" />

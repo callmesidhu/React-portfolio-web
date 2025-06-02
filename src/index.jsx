@@ -31,7 +31,8 @@ function Index() {
         "@type": "Organization",
         "name": "XyphX"
       },
-      "alumniOf": "Your College Name Here",
+      "alumniOf": "College of Engineering Trivandrum",
+      "image": "https://avatars.githubusercontent.com/u/92774572?v=4",
       "skills": [
         "React.js",
         "Node.js",

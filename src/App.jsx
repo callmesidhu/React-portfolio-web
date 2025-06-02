@@ -9,7 +9,7 @@ import About from "./Components/About";
 import Projects from "./Components/Projects";
 import Loader from "./Components/Loader";
 import Experience from "./Components/Experience";
-import { VisitorCount } from "./utils/analysis";
+import { VisitorCount } from "./utils/Counter";
 
 const App = () => {
   const [loading, setLoading] = useState(true);

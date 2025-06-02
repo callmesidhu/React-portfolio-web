@@ -12,7 +12,7 @@ const Navbar = () => {
       {/* Desktop Navbar */}
       <div className="container mx-6 flex justify-between items-center">
         {/* Logo with White Border */}
-        <a href='/admin' className="text-white cursor-pointer">
+        <a href='/admin' className="text-white cursor-pointer" target="_blank">
         <div className="text-white text-2xl font-bold hover:bg-violet-900 backdrop-blur-sm bg-white/10 border-white border transform hover:scale-105 p-2 px-8 rounded-3xl transition-all duration-500">
           <p>
             Call Me Sidhu
